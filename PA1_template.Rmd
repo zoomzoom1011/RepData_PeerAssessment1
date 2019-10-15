@@ -8,10 +8,9 @@ output:
 
 ## Loading and preprocessing the data
 
-```{r echo=TRUE}
+```{r library,echo=TRUE,message=FALSE,warning=FALSE}
 library(ggplot2)
 library(dplyr)
-data <- read.csv("activity.csv")
 ```
 
 ## What is mean total number of steps taken per day?
@@ -19,6 +18,7 @@ data <- read.csv("activity.csv")
 ```{r echo=TRUE}
 
 #dplyr group_by function
+data <- read.csv("activity.csv")
 data_perday <- data %>% 
   group_by(date) %>% 
   summarize(sum_steps = sum(steps,na.rm = TRUE))

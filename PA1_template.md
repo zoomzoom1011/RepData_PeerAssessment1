@@ -11,39 +11,7 @@ output:
 
 ```r
 library(ggplot2)
-```
-
-```
-## Warning: package 'ggplot2' was built under R version 3.5.3
-```
-
-```r
 library(dplyr)
-```
-
-```
-## Warning: package 'dplyr' was built under R version 3.5.3
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
-data <- read.csv("activity.csv")
 ```
 
 ## What is mean total number of steps taken per day?
@@ -51,6 +19,7 @@ data <- read.csv("activity.csv")
 
 ```r
 #dplyr group_by function
+data <- read.csv("activity.csv")
 data_perday <- data %>% 
   group_by(date) %>% 
   summarize(sum_steps = sum(steps,na.rm = TRUE))
@@ -59,7 +28,7 @@ data_perday <- data %>%
 hist(data_perday$sum_steps, xlab = "Total steps per day",main="Histogram",breaks = 50)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
 
 ```r
 mean(data_perday$sum_steps)
@@ -88,7 +57,7 @@ data_interval <- data %>%
 ggplot(data_interval, aes(x=interval, y=mean_steps)) + geom_line() + xlab("5-minute interval") + ylab("average number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 ```r
 data_interval[which(data_interval$mean_steps == max(data_interval$mean_steps)),]
@@ -129,7 +98,7 @@ data_new_perday <- data_new %>%
 hist(data_new_perday$sum_steps, xlab = "Total steps per day",main="Histogram",breaks = 50)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
 ```r
 mean(data_new_perday$sum_steps)
@@ -186,4 +155,4 @@ facet_grid(day ~.) + xlab("5-minute interval") + ylab("Mean of Steps") +
     ggtitle("Comparison of Weekdays and Weekends")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
